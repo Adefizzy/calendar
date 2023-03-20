@@ -2,18 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 
+import { ThemeProvider } from "styled-components";
+
+import "react-responsive-modal/styles.css";
 import Main from "./Main";
-import reducers from "./reducers";
 import reportWebVitals from "./reportWebVitals";
-import getStore from "./store/getStore";
+import store from "./store/getStore";
+import theme from "./utils/theme";
 
 // import main sass file
 import "./sass/app.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReduxProvider store={getStore(reducers)}>
-      <Main />
+    <ReduxProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <Main />
+      </ThemeProvider>
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById("root")

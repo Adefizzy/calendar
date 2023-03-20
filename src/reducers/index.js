@@ -1,5 +1,11 @@
-import { combineReducers } from "redux";
+import {
+  accuWeatherGetCities,
+  accuWeatherForcast,
+} from "../services/accuWeatherServices";
 
-const reducers = {};
+const reducers = {
+  [accuWeatherGetCities.reducerPath]: accuWeatherGetCities.reducer,
+  [accuWeatherForcast.reducerPath]: accuWeatherForcast.reducer,
+};
 
-export default combineReducers(reducers);
+export default reducers;

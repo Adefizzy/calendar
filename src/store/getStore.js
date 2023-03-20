@@ -1,21 +1,20 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
 
-const initialState = {};
-const enhancers = [];
-const middleware = [thunk];
+import reducers from "../reducers";
+import {
+  accuWeatherGetCities,
+  accuWeatherForcast,
+} from "../services/accuWeatherServices";
 
-if (process.env.NODE_ENV === "development") {
-  const devToolsExtension = window.devToolsExtension;
+// store has been reconfigured to use configureStore that comes with redux/tookit
+const store = configureStore({
+  reducer: reducers,
+  devTools: process.env.NODE_ENV === "development",
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      accuWeatherGetCities.middleware,
+      accuWeatherForcast.middleware
+    ),
+});
 
-  if (typeof devToolsExtension === "function") {
-    enhancers.push(devToolsExtension());
-  }
-}
-
-const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
-
-export default function getStore(reducer) {
-  const store = createStore(reducer, initialState, composedEnhancers);
-  return store;
-}
+export default store;
