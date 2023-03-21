@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import nextId from "react-id-generator";
 
-import getDate from "../utils/getDate";
+import updateDayWithEvent from "../util/updateDaysWithEvent";
 import getMonth from "../utils/getMonth";
 import getYear from "../utils/getYear";
 
@@ -39,37 +39,13 @@ const useCalender = () => {
     }));
   }, []);
 
-  const updateDayWithEvent = ({ weeks, year, month }) => {
-    const updatedWeeks = weeks.map((week) => {
-      return week.map((day) => {
-        const events = allEvents.filter((event) => {
-          const dateObj = getDate(event.dateAndTime);
-
-          return (
-            day.day === dateObj.day &&
-            month + 1 === dateObj.month &&
-            year === dateObj.year
-          );
-        });
-        if (events.length > 0) {
-          day.events = events;
-        }
-
-        return day;
-      });
-    });
-
-    return {
-      year,
-      month,
-      weeks: updatedWeeks,
-    };
-  };
-
-  useEffect(() => {
+  const updateDaysWithEvent = (allEvents, presentCalender) => {
     if (allEvents.length > 0 || presentCalender.weeks.length > 0) {
-      setPresentCalender(updateDayWithEvent(presentCalender));
+      setPresentCalender(updateDayWithEvent(allEvents, presentCalender));
     }
+  };
+  useEffect(() => {
+    updateDaysWithEvent(allEvents, presentCalender);
   }, [allEvents, presentCalender.month, presentCalender.year]);
 
   const getWeeks = (year, month) => {
@@ -178,13 +154,13 @@ const useCalender = () => {
 
   const addEvent = (event) => {
     if (event.isEdit) {
-      const updatedEvent = [...allEvents].map((evt) => {
+      const updatedEvents = [...allEvents].map((evt) => {
         if (evt.id === event.id) {
           return event;
         }
         return evt;
       });
-      setEvents(updatedEvent);
+      setEvents(updatedEvents);
     } else {
       setEvents([...allEvents, { ...event, id: nextId() }]);
     }

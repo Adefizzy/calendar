@@ -4,7 +4,6 @@ import "../sass/calendar.scss";
 
 import DaysOfWeek from "../components/DaysOfWeek";
 import ReminderModal from "../components/ReminderModal";
-
 import { useEventContext } from "../context/eventContext";
 import useCalender from "../hooks/useCalender";
 import {
