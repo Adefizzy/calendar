@@ -5,6 +5,8 @@ import { FiEdit2 } from "react-icons/fi";
 import { MdLocationOn } from "react-icons/md";
 import { Modal } from "react-responsive-modal";
 
+import moment from "moment";
+
 import { useEventContext } from "../context/eventContext";
 import { useGetForcastMutation } from "../services/accuWeatherServices";
 import {
@@ -18,7 +20,6 @@ import getWeatherIcon from "../utils/getWeatherIcon";
 import months from "../utils/months";
 import EventProps from "./EventProps";
 import WeekTitle from "./WeekTitle";
-import moment from "moment";
 
 const SameDayOfWeek = (props) => {
   const { updateSelectedEvent } = useEventContext();
