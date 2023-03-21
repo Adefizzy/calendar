@@ -45,7 +45,7 @@ const SameDayOfWeek = (props) => {
   };
 
   const handleEdit = () => {
-    updateSelectedEvent(selectedEvent);
+    updateSelectedEvent({ ...selectedEvent, isEdit: true });
     props.openModal();
     setOpen(false);
   };

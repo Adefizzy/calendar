@@ -13,3 +13,10 @@ export const formValidations = yup.object().shape({
     .required("Title is required"),
   dateAndTime: yup.string().required("Date is required"),
 });
+
+export const initialEvent = {
+  dateAndTime: new Date().toISOString().split(":").slice(0, 2).join(":"),
+  city: { label: "", value: "" },
+  title: "",
+  isEdit: false,
+};

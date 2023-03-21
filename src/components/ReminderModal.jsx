@@ -34,7 +34,9 @@ const ReminderModal = ({ onSubmit, open, onClose }) => {
           handleChange,
         }) => (
           <form onSubmit={handleSubmit}>
-            <h3 style={{ textAlign: "center" }}>Add Reminder</h3>
+            <h3 style={{ textAlign: "center" }}>
+              {selectedEvent.isEdit ? "Update Event" : "Add Event"}
+            </h3>
             {inputProps.map((input) => {
               return generateInputs({
                 onBlur: handleBlur,
@@ -47,7 +49,7 @@ const ReminderModal = ({ onSubmit, open, onClose }) => {
             })}
             <StyledBox mt="16" justifyContent="center" display="flex">
               <StyledButton type="submit" width="50%">
-                Add Reminder
+                {selectedEvent.isEdit ? "Update Event" : "Add Event"}
               </StyledButton>
             </StyledBox>
           </form>

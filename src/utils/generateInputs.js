@@ -38,6 +38,7 @@ const generateInputs = ({
           errors={errors}
           name={name}
           label={label}
+          value={values[name]}
         />
       );
     default:

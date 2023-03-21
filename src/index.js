@@ -4,6 +4,7 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { ThemeProvider } from "styled-components";
 
+import { EventProvider } from "./context/eventContext";
 import "react-responsive-modal/styles.css";
 import Main from "./Main";
 import reportWebVitals from "./reportWebVitals";
@@ -17,7 +18,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <ThemeProvider theme={theme}>
-        <Main />
+        <EventProvider>
+          <Main />
+        </EventProvider>
       </ThemeProvider>
     </ReduxProvider>
   </React.StrictMode>,

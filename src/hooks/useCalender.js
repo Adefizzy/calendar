@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
+import nextId from "react-id-generator";
 
 import getDate from "../utils/getDate";
 import getMonth from "../utils/getMonth";
@@ -176,13 +177,17 @@ const useCalender = () => {
   }
 
   const addEvent = (event) => {
-    setEvents([...allEvents, event]);
-    /* setPresentCalender(
-      updateDayWithEvent({
-        ...presentCalender,
-        allEvents: [...allEvents, event],
-      })
-    ); */
+    if (event.isEdit) {
+      const updatedEvent = [...allEvents].map((evt) => {
+        if (evt.id === event.id) {
+          return event;
+        }
+        return evt;
+      });
+      setEvents(updatedEvent);
+    } else {
+      setEvents([...allEvents, { ...event, id: nextId() }]);
+    }
   };
 
   return {

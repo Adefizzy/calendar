@@ -13,6 +13,7 @@ const AsyncSelectInput = ({
   errors,
   onChange,
   onBlur,
+  value,
 }) => {
   const contRef = useRef();
   const styledTheme = useTheme();
@@ -27,10 +28,12 @@ const AsyncSelectInput = ({
   const handleChange = (value) => {
     onChange({ target: { value, type: "select", name } });
   };
+
   return (
     <StyledBox ref={contRef}>
       <StyledLabel htmlFor={name}>{label}</StyledLabel>
       <AsyncSelect
+        value={value}
         type="option"
         onChange={handleChange}
         onBlur={onBlur}
