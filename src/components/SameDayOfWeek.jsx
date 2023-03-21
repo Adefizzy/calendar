@@ -3,13 +3,6 @@ import { BiCalendarCheck } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 import { MdLocationOn } from "react-icons/md";
-import {
-  TiWeatherCloudy,
-  TiWeatherPartlySunny,
-  TiWeatherDownpour,
-  TiWeatherSnow,
-} from "react-icons/ti";
-import { WiDaySnowThunderstorm, WiCloudy } from "react-icons/wi";
 import { Modal } from "react-responsive-modal";
 
 import { useEventContext } from "../context/eventContext";
@@ -21,7 +14,9 @@ import {
   StyledEvent,
 } from "../styles/calendar";
 import getDate from "../utils/getDate";
+import getWeatherIcon from "../utils/getWeatherIcon";
 import months from "../utils/months";
+import EventProps from "./EventProps";
 import WeekTitle from "./WeekTitle";
 
 const SameDayOfWeek = (props) => {
@@ -67,11 +62,6 @@ const SameDayOfWeek = (props) => {
         onClose={() => setOpen(false)}
       >
         <h3 style={{ textAlign: "center" }}>{selectedEvent?.title}</h3>
-        {/*  <StyledBox display="flex" alignItems="center">
-          <StyledBox mr="16">
-            <BiCalendarCheck style={{ fontSize: 32, color: "orange" }} />
-          </StyledBox>
-        </StyledBox> */}
         <EventProps
           icon={BiCalendarCheck}
           text={results.isLoading ? "...loading" : results?.data}
@@ -108,36 +98,6 @@ const SameDayOfWeek = (props) => {
       </Modal>
     </div>
   );
-};
-
-const EventProps = (props) => {
-  const Icon = props.icon;
-  return (
-    <StyledBox display="flex" alignItems="center" mt="18">
-      <StyledBox mr="16">
-        <Icon style={{ fontSize: 32, color: props.color ?? "purple" }} />
-      </StyledBox>
-      {props.children ? (
-        props.children
-      ) : (
-        <p style={{ fontSize: 18 }}>{props.text}</p>
-      )}
-    </StyledBox>
-  );
-};
-
-const getWeatherIcon = (text) => {
-  if (!text) return WiCloudy;
-  const regex = new RegExp(text, "ig");
-  if (regex.test("cloudy")) {
-    return TiWeatherCloudy;
-  } else if (regex.test("sunny")) {
-    return TiWeatherPartlySunny;
-  } else if (regex.test("rain")) {
-    return TiWeatherDownpour;
-  } else if (regex.test("snow")) {
-    return TiWeatherSnow;
-  } else return WiDaySnowThunderstorm;
 };
 
 export default SameDayOfWeek;
