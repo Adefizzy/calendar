@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 
 const initialEvent = {
   dateAndTime: new Date().toISOString().split(":").slice(0, 2).join(":"),
-  city: "",
+  city: { label: "", value: "" },
   title: "",
 };
 

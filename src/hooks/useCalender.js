@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 
+import getDate from "../utils/getDate";
 import getMonth from "../utils/getMonth";
 import getYear from "../utils/getYear";
 
@@ -36,16 +37,6 @@ const useCalender = () => {
       weeks: fullCalenderWeeks,
     }));
   }, []);
-
-  const getDate = (dateAndTime) => {
-    const date = dateAndTime.split("T")[0].split("-");
-
-    return {
-      year: parseInt(date[0]),
-      month: parseInt(date[1]),
-      day: parseInt(date[2]),
-    };
-  };
 
   const updateDayWithEvent = ({ weeks, year, month }) => {
     const updatedWeeks = weeks.map((week) => {

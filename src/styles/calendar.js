@@ -76,7 +76,7 @@ export const StyledCalendarTitle = styled.div`
 
 export const StyledIconButton = styled.button`
   background-color: transparent;
-  color: #fff;
+  color: ${(props) => props.color ?? "#fff"};
   display: flex;
   justify-content: center;
   align-items: center;
