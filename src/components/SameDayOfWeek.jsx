@@ -18,6 +18,7 @@ import getWeatherIcon from "../utils/getWeatherIcon";
 import months from "../utils/months";
 import EventProps from "./EventProps";
 import WeekTitle from "./WeekTitle";
+import moment from "moment";
 
 const SameDayOfWeek = (props) => {
   const { updateSelectedEvent } = useEventContext();
@@ -64,8 +65,8 @@ const SameDayOfWeek = (props) => {
         <h3 style={{ textAlign: "center" }}>{selectedEvent?.title}</h3>
         <EventProps
           icon={BiCalendarCheck}
-          text={results.isLoading ? "...loading" : results?.data}
           color="orange"
+          text={moment(selectedEvent?.dateAndTime).format("LLLL")}
         >
           <p style={{ fontSize: 18 }}>
             {months[getDate(selectedEvent?.dateAndTime).month - 1]}
@@ -79,10 +80,12 @@ const SameDayOfWeek = (props) => {
           <StyledBox display="flex" alignItems="center" ml="8" mr="8">
             <BsDot />
           </StyledBox>
-
           <p style={{ fontSize: 18 }}>
             {getDate(selectedEvent?.dateAndTime).year}
           </p>
+          <StyledBox ml="16">
+            <small>{moment(selectedEvent?.dateAndTime).format("LTS")}</small>
+          </StyledBox>
         </EventProps>
         <EventProps icon={MdLocationOn} text={selectedEvent?.city?.label} />
         <EventProps

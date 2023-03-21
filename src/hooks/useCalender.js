@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import nextId from "react-id-generator";
 
-import updateDayWithEvent from "../util/updateDaysWithEvent";
 import getMonth from "../utils/getMonth";
 import getYear from "../utils/getYear";
+import updateDayWithEvent from "../utils/updateDayWithEvent";
 
 const useCalender = () => {
   const [allEvents, setEvents] = useState([]);
